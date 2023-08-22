@@ -11,7 +11,9 @@ namespace WebApi.Infrastructure.MappingProfiles
         {
             CreateMap<Contact, BaseContactDto>()
                 .ReverseMap();
+            
             CreateMap<Contact, ContactDto>()
+                .ForMember(w => w.Account, e => e.MapFrom(s => s.Account))
                 .ReverseMap();
 
         }

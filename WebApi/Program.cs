@@ -3,6 +3,7 @@ using WebApi.Dal.Context;
 using AutoMapper;
 using WebApi.Interfaces;
 using WebApi.Services;
+using WebApi.Dal.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,7 +16,12 @@ builder.Services.AddDbContext<ProjectContext>(options =>
                                                                                    .GetConnectionString("WebApiDatabase")), ServiceLifetime.Transient);
 
 builder.Services.AddScoped<ProjectContext, ProjectContext>();
-builder.Services.AddScoped<IMainService, MainService>();
+builder.Services.AddScoped<UnitOfWork, UnitOfWork>();
+
+
+builder.Services.AddScoped<IContactService, ContactService>();
+builder.Services.AddScoped<IAccountService, AccountService>();
+builder.Services.AddScoped<IIncidentService, IncidentService>();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
